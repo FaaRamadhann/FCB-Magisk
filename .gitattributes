@@ -1,0 +1,8 @@
+# Paksa LF untuk file shell/module (Magisk butuh LF, bukan CRLF)
+*.sh text eol=lf
+module.prop text eol=lf
+META-INF/** text eol=lf
+system/bin/faacb text eol=lf
+service.sh text eol=lf
+customize.sh text eol=lf
+uninstall.sh text eol=lf
