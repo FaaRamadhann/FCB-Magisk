@@ -1,0 +1,50 @@
+#!/sbin/sh
+# Installer module faacb (Magisk v20.4+ / KernelSU compatible).
+# Dijalankan Magisk sebagai: update-binary <ver> <OUTFD> <ZIPFILE>
+umask 022
+
+OUTFD=$2
+ZIPFILE=$3
+
+ui_print() {
+  if [ "$BOOTMODE" = true ]; then
+    echo "$1"
+  else
+    echo -e "ui_print $1\nui_print" >> /proc/self/fd/$OUTFD
+  fi
+}
+
+BOOTMODE=false
+ps | grep -q zygote && BOOTMODE=true
+
+mount /data 2>/dev/null
+
+MODID=faacb
+if [ "$BOOTMODE" = true ]; then
+  MODROOT=/data/adb/modules_update
+else
+  MODROOT=/data/adb/modules
+fi
+MODPATH=$MODROOT/$MODID
+
+ui_print "- Faa Clipboard (FCB) v1.0.0"
+ui_print "- Menyalin file ke $MODPATH ..."
+rm -rf "$MODPATH" 2>/dev/null
+mkdir -p "$MODPATH"
+cd "$MODPATH" || exit 1
+unzip -o "$ZIPFILE" -x 'META-INF/*' || exit 1
+[ -f module.prop ] || { ui_print "! module.prop hilang, abort"; exit 1; }
+
+ui_print "- Set permission..."
+find "$MODPATH" -type d -exec chmod 755 {} \;
+find "$MODPATH" -type f -exec chmod 644 {} \;
+chmod 755 "$MODPATH/customize.sh" "$MODPATH/uninstall.sh" \
+          "$MODPATH/service.sh" "$MODPATH/system/bin/faacb"
+chcon -R u:object_r:system_file:s0 "$MODPATH/system" 2>/dev/null
+
+if [ -f "$MODPATH/customize.sh" ]; then
+  . "$MODPATH/customize.sh"
+fi
+
+ui_print "- Selesai. Reboot agar module aktif."
+exit 0

@@ -1,0 +1,42 @@
+#!/system/bin/sh
+# faacb — clipboard HP via root (dari module Magisk faacb).
+# Dipasang otomatis ke /system/bin oleh Magisk (magic mount).
+#
+#   faacb set <base64>   taruh teks ke clipboard HP (base64 = anti masalah quote)
+#   faacb get            cetak isi clipboard HP ke stdout
+#   faacb paste          tekan tombol PASTE di kolom aktif
+#
+# Contoh:
+#   adb shell su -c "faacb set $(echo -n 'halo' | base64 | tr -d '\n')"
+#   adb shell su -c faacb get
+#   adb shell su -c faacb paste
+#
+# WAJIB jalan sebagai root (Magisk su). Tanpa root -> kode 3.
+
+MODDIR=/data/adb/modules/faacb
+DEX=$MODDIR/helper/classes.dex
+
+if [ "$(id -u)" != "0" ]; then
+  echo "faacb: butuh root (jalankan: su -c 'faacb ...')" >&2
+  exit 3
+fi
+
+[ -f "$DEX" ] || { echo "faacb: $DEX hilang, reinstall module" >&2; exit 4; }
+
+case "$1" in
+  set)
+    [ -n "$2" ] || { echo "pakai: faacb set <base64>" >&2; exit 2; }
+    TEXT=$(echo "$2" | base64 -d 2>/dev/null) || exit 1
+    app_process -Djava.class.path=$DEX /system/bin com.faa.fcb.Main set "$TEXT"
+    ;;
+  get)
+    app_process -Djava.class.path=$DEX /system/bin com.faa.fcb.Main get
+    ;;
+  paste)
+    input keyevent 279
+    ;;
+  *)
+    echo "pakai: faacb set <base64> | faacb get | faacb paste" >&2
+    exit 2
+    ;;
+esac
