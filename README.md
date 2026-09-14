@@ -90,6 +90,18 @@ kalau ada update di sana, copy ulang ke sini).
    python fcc.py
    ```
 
+### Installer portable (Windows)
+
+Di folder `client/` ada installer sekali klik:
+
+- `install.bat` — copy client ke `%LOCALAPPDATA%\FCB`, daftarkan
+  `fcc` ke PATH user, bikin shortcut Desktop + Start Menu
+  (icon anime). Buka terminal **baru** lalu ketik `fcb`.
+  Tanpa admin. Butuh `pythonw` di PATH.
+- `uninstall.bat` — hapus shortcut, PATH, dan folder install.
+- `install.sh` — versi Linux (`~/.local/bin/fcb` + shortcut menu,
+  `./install.sh --uninstall` untuk hapus). Icon `icon.png`.
+
 ### Cara setup (sekali saja)
 
 1. Buka tab **PTH**, pilih device HP di dropdown.
