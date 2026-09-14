@@ -74,6 +74,36 @@ faacb paste          tekan tombol PASTE di kolom aktif (keyevent 279)
 Naikkan `version` + `versionCode` di `module.prop` **setiap update/fix**,
 lalu rebuild zip (`python zip.py` membaca versi otomatis).
 
+## Client PC (`client/`)
+
+UI tkinter untuk pakai module dari PC (tidak perlu hafal command).
+Isi: `fcc.py` + `fcb.vbs` (salinan dari repo Faa-Clipboard-FCB —
+kalau ada update di sana, copy ulang ke sini).
+
+### Cara pasang
+
+1. Install Python 3.8+ (sudah termasuk `tkinter`) dan ADB di PATH.
+2. Sambungkan HP (`adb devices`), pastikan module faacb sudah
+   terinstall + reboot (lihat atas).
+3. Double-click `fcb.vbs` (tanpa jendela cmd), atau:
+   ```bat
+   python fcc.py
+   ```
+
+### Cara setup (sekali saja)
+
+1. Buka tab **PTH**, pilih device HP di dropdown.
+2. Dropdown **Mode**: pilih **Module (root)** (atau biarkan bila itu default).
+3. Di HP: tap kolom teks sampai GBoard muncul (kursor aktif).
+4. Paste teks ber-emoji → log harusnya nongol `Mode faacb-root...`
+   + `[faacb 1/1] OK`, teks masuk utuh.
+5. Grant root: saat pertama dipakai, allow popup Magisk untuk Shell
+   (atau permanen di pengaturan Superuser). Tanpa ini mode root
+   turun otomatis ke mode lain (dicatat di log).
+
+Tab **HTP** buat arah sebaliknya (copy di HP → Ctrl+V di PC),
+Tab **Manual** berisi panduan + troubleshooting di dalam aplikasi.
+
 ## Lisensi
 
 Ikut lisensi project FCB (MIT).
