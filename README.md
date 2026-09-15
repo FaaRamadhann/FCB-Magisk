@@ -161,7 +161,7 @@ FCB-Magisk/
 │   ├── install.bat           # Installer Windows: PATH + shortcut Desktop
 │   ├── uninstall.bat         # Uninstaller Windows
 │   ├── install.sh            # Installer Linux (~/.local/bin/fcb)
-│   └── icon.ico / icon.png   # Icon anime (jangan diganti :v)
+│   └── icon.ico / icon.png
 ├── module/
 │   ├── module.prop           # Metadata modul (id faacb, Faa Ramadhan)
 │   ├── customize.sh          # Info install (dijalankan sekali)
