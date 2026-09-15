@@ -1,6 +1,6 @@
 # Faa Clipboard Magisk (FCB)
 
-[![Magisk](https://img.shields.io/badge/Magisk-Module-00af9c)](https://github.com/topjohnwu/Magisk) [![KernelSU](https://img.shields.io/badge/KernelSU-Module-323136)](https://github.com/tiann/KernelSU) [![APatch](https://img.shields.io/badge/APatch-Module-334d83)](https://github.com/apatch/apatch) [![License](https://img.shields.io/github/license/FaaRamadhann/FCB-Magisk)](LICENSE)
+[![Magisk](https://img.shields.io/badge/Magisk-Module-00af9c)](https://github.com/topjohnwu/Magisk) [![KernelSU](https://img.shields.io/badge/KernelSU-Module-323136)](https://github.com/tiann/KernelSU) [![APatch](https://img.shields.io/badge/APatch-Module-334d83)](https://github.com/apatch/apatch) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 ---
 
